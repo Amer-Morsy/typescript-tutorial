@@ -1,43 +1,46 @@
+let character: string = 'mario';
+let age: number;
+let isLoggedIn: boolean;
+
+age = 30; // valid
+// age = '30'; // invalid
+
+isLoggedIn = true; // valid
+isLoggedIn = false; // valid
+// isLoggedIn = 'true'; // invalid
+
 // arrays
-let names = ['Alice', 'Bob', 'Charlie'];
-// names ='Alice'; // Error
+let ninjas: string[] = [];
+ninjas.push('shaun'); //  valid
+ninjas.push('mario'); //  valid
+ninjas = ['yoshi']; //  valid
+// ninjas.push(10); // invalid
+console.log(ninjas);
 
-names.push('Dave'); // OK
-// names.push(123); // Error
-names[2] = 'Eve'; // OK
-// names[2] = 456; // Error
+// union types
+let mixed: (string | number | boolean)[] = [];
+mixed.push('hello'); // valid
+mixed.push(20); // valid
+mixed.push(true); // valid
+// mixed.push({ name: 'shaun' }); // invalid
+console.log(mixed);
 
-let numbers = [1, 2, 3];
-
-numbers.push(4); // OK
-// numbers.push('Four'); // Error
-numbers[2] = 5; // OK
-// numbers[2] = 'Five'; // Error
-
-let mixed = ['Alice', 1, 'Bob', 2];
-
-mixed.push('Charlie'); // OK
-mixed.push(5); // OK
-// mixed.push(true); // Error
-mixed[2] = 'Dave'; // OK
-// mixed[2] = false; // Error
+let uid: string | number;
+uid = '123';
+uid = 123;
+// uid = true; // invalid
 
 // objects
-let ninja = {
-  name: 'Yoshi',
-  age: 30,
-  belt: 'black'
-};
-//  ninja = true // Error
+let ninjaOne: object;
+ninjaOne = { name: 'yoshi', age: 30 }; // valid
+ninjaOne = { name: 'yoshi', age: 30, belt: 'black' }; // valid
+ninjaOne = []; // valid but not recommended 
 
-ninja.age = 40; // OK
-// ninja.age = 'forty'; // Error
-// ninja.skills = ['eating', 'sneaking']; // Error
-
-ninja = {
-  name: 'Yoshi',
-  age: 40,
-  belt: 'orange',
-  // skills: ['eating', 'sneaking'] // invalid
-};
-
+let ninjaTwo: {
+  name: string;
+  age: number;
+  belt: string;
+} ;
+ninjaTwo = { name: 'yoshi', age: 30, belt: 'black' }; // valid
+// ninjaTwo = { name: 'yoshi', age: 30 }; // invalid
+// ninjaTwo = { name: 'yoshi', age: 30, belt: 'black', skills: [] }; // invalid
