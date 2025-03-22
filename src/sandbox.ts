@@ -1,27 +1,35 @@
-let greet: Function = () => {
-  console.log('Hello, World!');
-};
+// let greet: Function;
 
-greet(); // Hello, World!
-// greet = 'Hello, World!'; // Error: Type 'string' is not assignable to type 'Function'.
+// example 1
+let greet: (a: string, b: string) => void;
 
-greet = () => {
-  console.log('Hello, Again!');
+greet = (name: string, greeting: string) => {
+  console.log(`${name} says ${greeting}`);
 }
 
-greet(); // Hello, Again!
+greet('John', 'Hello');
 
-const add = (a: number, b: number, c/*?*/: number | string = 0): void => {
-  console.log(a + b);
-  console.log(c);
+// example 2
+let calc: (a: number, b: number, c: string) => number;
+
+calc = (numOne: number, numTwo: number, action: string) => {
+  if (action === 'add') {
+    return numOne + numTwo;
+  } else {
+    return numOne - numTwo;
+  }
 }
 
-add(5, 10); // 15, 0
-add(5, 10, '20'); // 15, 20
+console.log(calc(20, 5, 'add'));
 
-const minus = (a: number, b: number): number => {
-  return a - b;
+
+// example 3
+type person = { name: string, age: number };
+
+let logDetails: (obj: person) => void;
+
+logDetails = (ninja: person) => {
+  console.log(`${ninja.name} is ${ninja.age} years old`);
 }
 
-let result = minus(10, 7);
-console.log(result); // 3
+logDetails({ name: 'John', age: 30 });

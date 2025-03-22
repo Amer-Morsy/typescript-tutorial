@@ -1,21 +1,24 @@
 "use strict";
-let greet = () => {
-    console.log('Hello, World!');
+// let greet: Function;
+// example 1
+let greet;
+greet = (name, greeting) => {
+    console.log(`${name} says ${greeting}`);
 };
-greet(); // Hello, World!
-// greet = 'Hello, World!'; // Error: Type 'string' is not assignable to type 'Function'.
-greet = () => {
-    console.log('Hello, Again!');
+greet('John', 'Hello');
+// example 2
+let calc;
+calc = (numOne, numTwo, action) => {
+    if (action === 'add') {
+        return numOne + numTwo;
+    }
+    else {
+        return numOne - numTwo;
+    }
 };
-greet(); // Hello, Again!
-const add = (a, b, c /*?*/ = 0) => {
-    console.log(a + b);
-    console.log(c);
+console.log(calc(20, 5, 'add'));
+let logDetails;
+logDetails = (ninja) => {
+    console.log(`${ninja.name} is ${ninja.age} years old`);
 };
-add(5, 10); // 15, 0
-add(5, 10, '20'); // 15, 20
-const minus = (a, b) => {
-    return a - b;
-};
-let result = minus(10, 7);
-console.log(result); // 3
+logDetails({ name: 'John', age: 30 });
