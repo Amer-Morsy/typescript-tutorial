@@ -6,26 +6,35 @@ var Invoice = /** @class */ (function () {
         this.amount = amount;
     }
     Invoice.prototype.format = function () {
-        return "".concat(this.client, " owes \u00A3").concat(this.amount, " for ").concat(this.details);
+        return "".concat(this.client, " owes $").concat(this.amount, " for ").concat(this.details);
     };
     return Invoice;
 }());
-var me = {
-    name: 'shaun',
-    age: 30,
-    speak: function (text) {
-        console.log(text);
-    },
-    spend: function (amount) {
-        console.log('I spent', amount);
-        return amount;
-    },
-};
-// console.log(me);
-// console.log(me.speak('hello, world'));
-var geetPerson = function (person) {
-    console.log(person.name);
-    console.log(person.age);
-    person.speak('hello, world');
-};
-geetPerson(me);
+var Payment = /** @class */ (function () {
+    function Payment(recipient, details, amount) {
+        this.recipient = recipient;
+        this.details = details;
+        this.amount = amount;
+    }
+    Payment.prototype.format = function () {
+        return "".concat(this.recipient, " is owed $").concat(this.amount, " for ").concat(this.details);
+    };
+    return Payment;
+}());
+var form = document.querySelector('.new-item-form');
+// inputs
+var type = document.querySelector('#type');
+var toFrom = document.querySelector('#toFrom');
+var details = document.querySelector('#details');
+var amount = document.querySelector('#amount');
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var doc;
+    if (type.value === 'invoice') {
+        doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber);
+    }
+    else {
+        doc = new Payment(toFrom.value, details.value, amount.valueAsNumber);
+    }
+    console.log(doc);
+});

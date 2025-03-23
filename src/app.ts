@@ -1,44 +1,51 @@
-class Invoice {
+interface hasFormatter {
+  format(): string;
+}
+
+class Invoice implements hasFormatter {
   constructor(
     readonly client: string,
     private details: string,
     public amount: number
-  ) {
-  }
+  ) { }
 
   format() {
-    return `${this.client} owes £${this.amount} for ${this.details}`;
+    return `${this.client} owes $${this.amount} for ${this.details}`;
   }
 }
 
-// interfaces
+class Payment implements hasFormatter {
+  constructor(
+    readonly recipient: string,
+    private details: string,
+    public amount: number
+  ) { }
 
-interface isPerson {
-  name: string;
-  age: number;
-  speak(a: string): void;
-  spend(a: number): number;
+  format() {
+    return `${this.recipient} is owed $${this.amount} for ${this.details}`;
+  }
 }
 
-const me: isPerson = {
-  name: 'shaun',
-  age: 30,
-  speak(text: string): void {
-    console.log(text);
-  },
-  spend(amount: number): number {
-    console.log('I spent', amount);
-    return amount;
-  },
-}
 
-// console.log(me);
-// console.log(me.speak('hello, world'));
 
-const geetPerson = (person: isPerson): void => {
-  console.log(person.name);
-  console.log(person.age);
-  person.speak('hello, world');
-}
+const form = document.querySelector('.new-item-form') as HTMLFormElement;
 
-geetPerson(me);
+// inputs
+const type = document.querySelector('#type') as HTMLSelectElement;
+const toFrom = document.querySelector('#toFrom') as HTMLInputElement;
+const details = document.querySelector('#details') as HTMLInputElement;
+const amount = document.querySelector('#amount') as HTMLInputElement;
+
+form.addEventListener('submit', (e: Event) => {
+  e.preventDefault();
+
+  let doc: hasFormatter;
+
+  if (type.value === 'invoice') {
+    doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber);
+  } else {
+    doc = new Payment(toFrom.value, details.value, amount.valueAsNumber);
+  }
+
+  console.log(doc);
+});
