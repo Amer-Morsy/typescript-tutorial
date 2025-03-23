@@ -10,6 +10,15 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 var Invoice = /** @class */ (function () {
     function Invoice(client, details, amount) {
         this.client = client;
@@ -66,11 +75,13 @@ var list = new ListTemplate(ul);
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     var doc;
+    var values;
+    values = [toFrom.value, details.value, amount.valueAsNumber];
     if (type.value === 'invoice') {
-        doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber);
+        doc = new (Invoice.bind.apply(Invoice, __spreadArray([void 0], values, false)))();
     }
     else {
-        doc = new Payment(toFrom.value, details.value, amount.valueAsNumber);
+        doc = new (Payment.bind.apply(Payment, __spreadArray([void 0], values, false)))();
     }
     list.render(doc, type.value, 'end');
 });
@@ -104,3 +115,14 @@ var film = {
 };
 console.log(book, film);
 //#endregion GENERICS
+// TUPLES
+var arr = ['ryu', 25, true];
+arr[0] = false;
+arr[1] = 'yoshi';
+arr = [30, false, 'yoshi'];
+var tup = ['ryu', 25, true];
+// tup[0] = 20; // error
+tup[0] = 'ken';
+var student;
+student = ['chun-li', 223423]; // correct
+// student = [223423, 'chun-li']; // error

@@ -65,11 +65,13 @@ form.addEventListener('submit', (e: Event) => {
   e.preventDefault();
 
   let doc: hasFormatter;
+  let values: [string, string, number];
+  values = [toFrom.value, details.value, amount.valueAsNumber];
 
   if (type.value === 'invoice') {
-    doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber);
+    doc = new Invoice(...values);
   } else {
-    doc = new Payment(toFrom.value, details.value, amount.valueAsNumber);
+    doc = new Payment(...values);
   }
 
   list.render(doc, type.value, 'end');
@@ -112,3 +114,18 @@ const film: Resource<object> = {
 console.log(book, film);
 
 //#endregion GENERICS
+
+// TUPLES
+
+let arr = ['ryu', 25, true];
+arr[0] = false;
+arr[1] = 'yoshi';
+arr = [30, false, 'yoshi'];
+
+let tup: [string, number, boolean] = ['ryu', 25, true];
+// tup[0] = 20; // error
+tup[0] = 'ken';
+
+let student: [string, number];
+student = ['chun-li', 223423]; // correct
+// student = [223423, 'chun-li']; // error
