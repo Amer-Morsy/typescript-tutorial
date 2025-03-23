@@ -82,15 +82,25 @@ var addUID = function (obj) {
 };
 var docOne = addUID({ name: 'yoshi', age: 40 });
 console.log(docOne);
-var docThree = {
+// ENUMS
+var ResourceType;
+(function (ResourceType) {
+    ResourceType[ResourceType["BOOK"] = 0] = "BOOK";
+    ResourceType[ResourceType["AUTHOR"] = 1] = "AUTHOR";
+    ResourceType[ResourceType["FILM"] = 2] = "FILM";
+    ResourceType[ResourceType["DIRECTOR"] = 3] = "DIRECTOR";
+    ResourceType[ResourceType["PERSON"] = 4] = "PERSON";
+})(ResourceType || (ResourceType = {}));
+;
+var book = {
     uid: 1,
-    name: 'shaun',
-    data: { title: 'super' }
+    type: ResourceType.BOOK,
+    data: { title: 'name of the wind' }
 };
-var docFour = {
-    uid: 2,
-    name: 'yoshi',
-    data: ['bread', 'milk']
+var film = {
+    uid: 1,
+    type: ResourceType.FILM,
+    data: { title: 'name of the wind' }
 };
-console.log(docThree, docFour);
+console.log(book, film);
 //#endregion GENERICS
