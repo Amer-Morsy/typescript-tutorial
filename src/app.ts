@@ -1,3 +1,4 @@
+//#region classes
 interface hasFormatter {
   format(): string;
 }
@@ -46,7 +47,9 @@ class ListTemplate {
     }
   }
 }
+//#endregion classes
 
+//#region app
 const form = document.querySelector('.new-item-form') as HTMLFormElement;
 
 // inputs
@@ -71,3 +74,37 @@ form.addEventListener('submit', (e: Event) => {
 
   list.render(doc, type.value, 'end');
 });
+//#endregion  app
+
+//#region GENERICS
+const addUID = <T extends { name: string }>(obj: T) => {
+  let uid = Math.floor(Math.random() * 100);
+  return { ...obj, uid };
+};
+
+let docOne = addUID({ name: 'yoshi', age: 40 });
+console.log(docOne);
+
+// with interface 
+
+interface Resource<T> {
+  uid: number;
+  name: string;
+  data: T;
+}
+
+const docThree: Resource<object> = {
+  uid: 1,
+  name: 'shaun',
+  data: { title: 'super' }
+}
+
+const docFour: Resource<string[]> = {
+  uid: 2,
+  name: 'yoshi',
+  data: ['bread', 'milk']
+}
+
+console.log(docThree, docFour);
+
+//#endregion GENERICS
